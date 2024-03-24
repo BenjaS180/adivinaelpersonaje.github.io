@@ -116,7 +116,52 @@
                 "Con mi cadena de condenación, atrapo las almas errantes en la oscuridad eterna.",
                 "Mi farol ilumina los rincones más oscuros, donde las sombras acechan y los secretos yacen.",
                 "Soy el carcelero de las almas perdidas, mi risa retumba en los pasillos del abismo."
-            ]
+            ],
+            "darius": [
+                "Con mi hacha masacro a mis enemigos en el nombre de Noxus.",
+                "Mi sed de sangre nunca se sacia, buscando siempre la gloria en el campo de batalla.",
+                "Llevo el estandarte de la legión Noxiana hacia la victoria, donde el poder y la fuerza son la única verdad."
+            ],
+            "lux": [
+                "Con mi vara resplandeciente, ilumino la oscuridad y disipo la sombra.",
+                "Mi determinación es tan brillante como mi luz, protegiendo a los inocentes con cada hechizo lanzado.",
+                "Soy la maga radiante de Demacia, donde la justicia y el orden son mis mayores armas."
+            ],
+            "katarina": [
+                "Con mis dagas danzantes, corto a través de mis enemigos como una ráfaga de viento mortal.",
+                "Mi elegancia en el combate es tan letal como mi ferocidad, bailando en el filo de la muerte sin temor.",
+                "Soy la hoja siniestra de Noxus, desatando el caos y la destrucción donde quiera que vaya."
+            ],
+            "teemo": [
+                "Con mi sombrero y mis dardos envenenados, soy la pesadilla de los enemigos que se atreven a adentrarse en mi territorio.",
+                "Mi astucia y mi agilidad son mis mayores armas, acechando en las sombras y esperando el momento oportuno para atacar.",
+                "Soy el explorador temerario de Bandle City, defendiendo nuestra tierra con valentía y determinación contra cualquier amenaza."
+            ],
+            "ashe": [
+                "Con mi arco gélido, lanzo flechas heladas que perforan el corazón de mis enemigos.",
+                "Mi liderazgo es tan firme como mi puntería, guiando a mi pueblo con sabiduría y coraje.",
+                "Soy la reina de Freljord, donde el frío no solo congela la carne, sino también el alma de aquellos que se atreven a desafiarnos."
+            ],
+            "garen": [
+                "Con mi espada imponente, corto a través de las líneas enemigas con una fuerza indomable.",
+                "Mi valor es tan sólido como mi armadura, defendiendo a Demacia con honor y lealtad.",
+                "Soy el guerrero valiente de Demacia, donde el deber y la justicia son mis guías en el campo de batalla."
+            ],
+            "jhin": [
+                "Con mi rifle adornado, persigo la perfección en cada disparo, transformando la muerte en una obra de arte.",
+                "Mi obsesión por el espectáculo es solo superada por mi sed de sangre, creando caos y belleza con cada balazo.",
+                "Soy el virtuoso del asesinato, donde cada asesinato es una sinfonía y cada muerte es un aplauso."
+            ],
+            "yasuo": [
+                "Con mi espada del viento, corto a través de la injusticia como una tormenta imparable.",
+                "Mi camino es solitario, pero mi espíritu es inquebrantable, buscando la redención en cada batalla.",
+                "Soy el errante de la grieta, donde mi honor es mi única compañía y mi venganza es mi única motivación."
+            ],
+            "ahri": [
+                "Con mis encantos seductores, atraigo a mis presas antes de devorar sus almas.",
+                "Mi gracia en el combate es tan hipnotizante como mi belleza, danzando entre mis enemigos con elegancia mortal.",
+                "Soy el zorro de nueve colas, donde la astucia y la malicia son mis armas más letales."
+            ],
         };
 
         const responses = Object.keys(clues);
@@ -154,7 +199,6 @@
             const remainingAttempts = document.getElementById('attempts');
 
             if (correctAnswer === userInput) {
-                resetCounter()
                 alert('¡Correcto! ¡Has adivinado el personaje!');
                 resetGame();
             } else {
@@ -169,6 +213,7 @@
         }
 
         function resetGame() {
+            resetCounter();
             attempts = 3;
             document.getElementById('response').value = '';
             document.getElementById('attempts').textContent = `Te quedan ${attempts} intentos.`;
