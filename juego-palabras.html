@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Palabras</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .tittle-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .clues {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .clues p {
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 80px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #cluesList {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #cluesList li {
+            margin-bottom: 5px;
+        }
+
+        #attempts {
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <header class="tittle-container">
+        <h1>Adivina el Personaje de Lol</h1>
+    </header>
+    <section class="clues">
+        <p>Pistas de personajes de lol</p>
+        <ol id="cluesList">
+        </ol>
+    </section>
+    <div class="container">
+        <input type="text" name="response" id="response" required>
+        <button onclick="checkResponse()">Revisar</button>
+        <p id="attempts">Te quedan 3 intentos.</p>
+    </div>
+
+    <script>
+        const clues = {
+            "ezreal": [
+                "Tiene el cabello amarillo",
+                "Es de Piltover",
+                "Su amada es lux pero zoe lo busca"
+            ],
+            "morgana": [
+                "Con alas oscuras desplegadas, soy la sombra que persigue la redención. ¿Quién soy, la hechicera de la balanza?",
+                "Envuelta en un velo de misterio, mis cadenas etéreas atrapan a los culpables. ¿Quién soy, la guardiana de la justicia caída?",
+                "Mis ojos reflejan la dualidad de mi alma, entre la luz y la oscuridad. ¿Quién soy, la hechicera condenada por la traición?"
+            ],
+            "annie": [
+                "Con mi osito de peluche al lado, causo estragos con mi magia ardiente.",
+                "Mi risa infantil oculta un poder indomable, capaz de incendiar a mis enemigos.",
+                "Vestida con ropas diminutas y una sonrisa traviesa, soy la encantadora de los campos, donde la magia florece en llamas."
+            ],
+            "lucian": [
+                "Con dos pistolas en mano, soy el cazador de las sombras, persiguiendo la venganza.",
+                "Mi determinación ardiente ilumina la oscuridad, luchando contra el mal que acecha en las sombras.",
+                "Mis pasos son rápidos como el rayo, mi puntería infalible como la luz del sol."
+            ],
+            "senna": [
+                "Con mi arma imbuida en la luz, soy la guardiana de los espíritus atrapados, liberándolos con cada disparo.",
+                "Mi alma está entrelazada con las sombras, pero mi voluntad es inquebrantable, desafiando la oscuridad.",
+                "Mis ojos reflejan la esperanza y la determinación, mientras camino el camino entre la luz y la oscuridad."
+            ],
+            "thresh": [
+                "Con mi cadena de condenación, atrapo las almas errantes en la oscuridad eterna.",
+                "Mi farol ilumina los rincones más oscuros, donde las sombras acechan y los secretos yacen.",
+                "Soy el carcelero de las almas perdidas, mi risa retumba en los pasillos del abismo."
+            ]
+        };
+
+        const responses = Object.keys(clues);
+
+        let correctAnswer = "";
+
+        let attempts = 3;
+
+        let counter = 0
+
+        function resetCounter() {
+            counter = 0
+        }
+
+        function generateCorrectAnswer() {
+            const randomIndex = Math.floor(Math.random() * responses.length);
+            correctAnswer = responses[randomIndex];
+            return correctAnswer;
+        }
+
+        function displayClue() {
+            const cluesList = document.getElementById('cluesList');
+            const currentClues = clues[correctAnswer];
+            const remainingAttempts = document.getElementById('attempts');
+            if (currentClues.length > 0) {
+                const clue = currentClues.shift();
+                counter = counter + 1;
+                cluesList.innerHTML += `<li>${counter}: ${clue}</li>`;
+            }
+            remainingAttempts.textContent = `Te quedan ${attempts} intentos.`;
+        }
+
+        function checkResponse() {
+            const userInput = document.getElementById('response').value.toLowerCase();
+            const remainingAttempts = document.getElementById('attempts');
+
+            if (correctAnswer === userInput) {
+                resetCounter()
+                alert('¡Correcto! ¡Has adivinado el personaje!');
+                resetGame();
+            } else {
+                attempts--;
+                if (attempts === 0) {
+                    alert('¡Lo siento! Se acabaron los intentos.');
+                    resetGame();
+                } else {
+                    displayClue();
+                }
+            }
+        }
+
+        function resetGame() {
+            attempts = 3;
+            document.getElementById('response').value = '';
+            document.getElementById('attempts').textContent = `Te quedan ${attempts} intentos.`;
+            document.getElementById('cluesList').innerHTML = '';
+            generateCorrectAnswer();
+            displayClue();
+        }
+
+        window.onload = resetGame;
+    </script>
+</body>
+</html>
